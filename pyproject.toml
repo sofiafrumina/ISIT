@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ml-fillipov"
+name = "isit"
 version = "0.1.0"
 description = ""
 authors = ["sofiafrumina <sofiafrumina@mail.ru>"]
@@ -11,6 +11,9 @@ fastapi = "^0.110.0"
 pydantic = "^2.6.4"
 uvicorn = "^0.28.0"
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.2"
 
 [build-system]
 requires = ["poetry-core"]
