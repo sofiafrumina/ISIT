@@ -55,27 +55,22 @@ async def download_and_compress_image(url, category):
     await save_image(url, save_path)
     print(f"Image downloaded: {url}")
 
-async def process_pages(base_url, category, total_pages):
-    os.makedirs(category, exist_ok=True)  # Проверяем и создаем директорию для каждой категории
-    for page_number in range(1, total_pages + 1):
-        url = f"{base_url}?page={page_number}"
-        print(f"Processing page: {url}")
-        image_urls = await crawl(url)
-
-        # Находим изображения на текущей странице и скачиваем их
-        tasks = [download_and_compress_image(image_url, category) for image_url in image_urls]
-        await asyncio.gather(*tasks)
-
 async def main():
     base_urls = [
-        ("https://www.chitai-gorod.ru/catalog/artists/kisti-110622", "images/brushes", 10),
-        ("https://www.chitai-gorod.ru/catalog/artists/kraski-110628", "images/paints", 10),
-        ("https://www.chitai-gorod.ru/catalog/artists/bumaga-i-karton-dlya-hudozhestvennyh-rabot-110646", "images/papers", 10)
+        ("https://www.chitai-gorod.ru/catalog/artists/kisti-110622", "images"),
     ]
+    total_pages = 10
 
-    # Параллельное выполнение для каждой базовой ссылки
-    tasks = [process_pages(base_url, category, total_pages) for base_url, category, total_pages in base_urls]
-    await asyncio.gather(*tasks)
+    for base_url, category in base_urls:
+        os.makedirs(category, exist_ok=True)  # Проверяем и создаем директории для каждой категории
+        for page_number in range(1, total_pages + 1):
+            url = f"{base_url}?page={page_number}"
+            print(f"Processing page: {url}")
+            image_urls = await crawl(url)
+
+            # Находим изображения на текущей странице и скачиваем их
+            tasks = [download_and_compress_image(image_url, category) for image_url in image_urls]
+            await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
     asyncio.run(main())
