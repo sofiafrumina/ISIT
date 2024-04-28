@@ -68,9 +68,9 @@ async def process_pages(base_url, category, total_pages):
 
 async def main():
     base_urls = [
-        ("https://www.chitai-gorod.ru/catalog/artists/kisti-110622", "images/brushes", 2),
-        ("https://www.chitai-gorod.ru/catalog/artists/kraski-110628", "images/paints", 2),
-        ("https://www.chitai-gorod.ru/catalog/artists/bumaga-i-karton-dlya-hudozhestvennyh-rabot-110646", "images/papers", 2)
+        ("https://www.chitai-gorod.ru/catalog/artists/kisti-110622", "images/brushes", 10),
+        ("https://www.chitai-gorod.ru/catalog/artists/kraski-110628", "images/paints", 10),
+        ("https://www.chitai-gorod.ru/catalog/artists/bumaga-i-karton-dlya-hudozhestvennyh-rabot-110646", "images/papers", 10)
     ]
 
     # Параллельное выполнение для каждой базовой ссылки
